@@ -1,3 +1,6 @@
+/*
+* This works best with Integer as a key, if string then hash may collide. 
+*/
 import java.io.*;
 import java.util.*;
 
@@ -9,7 +12,6 @@ public class NWaySetAssociativeCache {
     /**
      * Parses Test Case input to instantiate and invoke a SetAssociativeCache
      *
-     * NOTE: You can typically ignore anything in here. Feel free to collapse...
      */
     static class SetAssociativeCacheRunner {
         public static void parseInput(InputStream inputStream) throws IOException {
@@ -53,20 +55,6 @@ public class NWaySetAssociativeCache {
 
     // ############################ BEGIN Solution Classes ############################
 
-    /**
-     * NOTE: You are free to modify anything below, except for class names and generic interface.
-     * Other public interface changes may require updating one or more of the helper classes above
-     * for test cases to run and pass.
-     * <p>
-     * A Set-Associative Cache data structure with fixed capacity.
-     * <p>
-     * - Data is structured into setCount # of setSize-sized sets.
-     * - Every possible key is associated with exactly one set via a hashing algorithm
-     * - If more items are added to a set than it has capacity for (i.e. > setSize items),
-     *      a replacement victim is chosen from that set using an LRU algorithm.
-     * <p>
-     * NOTE: Part of the exercise is to allow for different kinds of replacement algorithms...
-     */
     public static class SetAssociativeCache<TKey, TValue> {
         int Capacity;
         int SetSize;
@@ -100,8 +88,6 @@ public class NWaySetAssociativeCache {
 
         /**
          * Adds the `key` to the cache with the associated value, or overwrites the existing key.
-         * If adding would exceed capacity, an existing key is chosen to replace using an LRU algorithm
-         * (NOTE: It is part of this exercise to allow for more replacement algos)
          */
         public void set(TKey key, TValue value) {
             int setIndex = this.getSetIndex(key);
@@ -179,8 +165,6 @@ public class NWaySetAssociativeCache {
 
         /**
          * Adds the `key` to the cache with the associated value, or overwrites the existing key.
-         * If adding would exceed capacity, an existing key is chosen to replace using an LRU algorithm
-         * (NOTE: It is part of this exercise to allow for more replacement algos)
          */
         public void set(TKey key, TValue value) {
             CacheItem<TKey, TValue> item = Store.get(key);
@@ -261,11 +245,6 @@ public class NWaySetAssociativeCache {
     }
 
     // ############################ BEGIN Helper Classes ############################
-    // NOTE: Your code in the classes below will not be evaluated as part of the exericse.
-    // They are just used by the stub code in the header to help run HackerRank test cases.
-    // You may need to make small modifications to these classes, depending on your interface design,
-    // for tests to run and pass, but it is not a core part of the exercise
-    //
     static class OutParam<T> {
         public T value;
     }
@@ -308,8 +287,6 @@ public class NWaySetAssociativeCache {
             }
         }
     }
-
-    // TODO: Consider making use of this in the `SetAssociativeCacheFactory` above to map replacement algo name 
     // to a IReplacementAlgo instance for the interface you design
     public static class ReplacementAlgoFactory<TKey, TValue> {
         public IReplacementAlgo<TKey, TValue> createReplacementAlgo(String replacementAlgoName) {
