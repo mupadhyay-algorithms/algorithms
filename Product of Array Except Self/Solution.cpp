@@ -20,11 +20,11 @@ public:
         int length = nums.size();
 
         vector<int> ret(length, 1);
-        //left processing
+        //left processing doesn't include current number only upto before
         for (int i = 1; i < length; i++) {
             ret[i] = nums[i - 1] * ret[i - 1];
         }
-        // right processing
+        // right processing doesn't include current only after
         int rightproduct = 1;
         for (int i = length - 1; i >= 0; i--) {
 
